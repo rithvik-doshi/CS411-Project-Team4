@@ -10,7 +10,7 @@ https://openweathermap.org/price
 
 Idea 2
 
-	Scan the barcode of a product and query it’s information, such as price, calories, etc. Can compare MSRP to in-store/online prices, add calories together, track product metadata and recommend similar products. Add food products to an ingredient list and query nutrition api to get full nutritional analysis on your meal.
+Scan the barcode of a product and query it’s information, such as price, calories, etc. Can compare MSRP to in-store/online prices, add calories together, track product metadata and recommend similar products. Add food products to an ingredient list and query nutrition api to get full nutritional analysis on your meal.
 
 API Link: https://upcdatabase.org/api-product-get
 
