@@ -1,0 +1,15 @@
+Flight Tracker: 
+
+Chances-of-flight-cancellation app, where we take the user’s selected flight, query it, find the weather forecast in the departing and arriving cities, and return some calculated probability that the flight will be canceled. The user can store their info in a DB and we can require users to make an account. Requires a flight-path and weather API (AeroAPI and OpenWeather API). An e-mail will be sent to those users whose flight has a high probability of being canceled based on our forecast.
+API Links: 
+ - https://flightaware.com/commercial/aeroapi
+ - https://openweathermap.org/
+User Story 1: As a user, I want to be able to know what the chances of my flight getting canceled are at a specific time. I would like to be able to input my flight information and a specific query time before the flight leaves in order to receive an analysis on whether my flight will be canceled or not. 
+
+User Story 2: As a user, I want to receive these results via email for convenience. Furthermore, these emails should contain details about the analysis that I do not want to see in the application, somewhat like a receipt.
+
+User Story 3: As a user, I want to be able to log in in order to have a private search history so that I don’t need to search my flight every time I use the app and I can get the latest information about my flight with a simple click. I want to be able to view all of my flights if I have several, and see information about them at a glance.
+
+User Story 4: As a user with high flight cancellation probability, I want to be redirected to my airline’s website for a quicker cancellation. I should be able to simply click a link where I can go to the airline’s website. It would be helpful to have this information be in an email to alert me of the high probability and the link to follow.
+
+User Story 5: As a user, I want to be able to logout to protect my personal details. I want to also be able to delete my account and have my data be cleared.
