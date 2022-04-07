@@ -6,8 +6,10 @@
   <h1>Hello {name}!</h1>
   <p>
     Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn
-    how to build Svelte apps, you dummies.
+    how to build Svelte apps.
   </p>
+  <button>API 1</button>
+  <button>API 2</button>
 </main>
 
 <style>
