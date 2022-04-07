@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "04d919a8-b4db-441e-961a-3212c2377800",
+		"name": "CS411",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AeroAPI test",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "x-apikey",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "1pSln26Mq7sZElcu4UbPqM05AhaX84mg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://aeroapi.flightaware.com/aeroapi/airports/KSFO/flights",
+					"protocol": "https",
+					"host": [
+						"aeroapi",
+						"flightaware",
+						"com"
+					],
+					"path": [
+						"aeroapi",
+						"airports",
+						"KSFO",
+						"flights"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OpenWeather test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openweathermap.org/data/2.5/forecast?lat=42.361145&lon=-71.057083&appid=81ac445e912db9bf362fc4e9678ec100",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"forecast"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "42.361145"
+						},
+						{
+							"key": "lon",
+							"value": "-71.057083"
+						},
+						{
+							"key": "appid",
+							"value": "81ac445e912db9bf362fc4e9678ec100"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
