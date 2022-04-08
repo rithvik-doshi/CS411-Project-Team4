@@ -15,7 +15,7 @@ def search():
     username = request.form["username"]
     username = re.sub(r'\W+', '', username)    # sanitize the username to only alphanumerics
 
-    res = duo_api_query(username)
+    res = api_query(username)
 
     return render_template("search.html", username=username,
     email=res["email"],
