@@ -3,26 +3,27 @@ import re
 
 app = Flask(__name__)
 
+
 @app.route("/", methods=["GET"])
 def hello():
 
-    return render_template("index.html")
+    return render_template("index.html", team_num="Team 4")
 
 
 @app.route("/search", methods=["POST"])
 def search():
 
     username = request.form["username"]
-    username = re.sub(r'\W+', '', username)    # sanitize the username to only alphanumerics
+    # sanitize the username to only alphanumerics
+    username = re.sub(r'\W+', '', username)
 
     res = duo_api_query(username)
 
     return render_template("search.html", username=username,
-    email=res["email"],
-    lastlogin=res["last-login"],
-    prov=res["provisioned"],
-    acclvl=res["access-level"])
-
+                           email=res["email"],
+                           lastlogin=res["last-login"],
+                           prov=res["provisioned"],
+                           acclvl=res["access-level"])
 
 
 def api_query(username):
@@ -38,7 +39,6 @@ def api_query(username):
     fakeresults["email"] = username + "@bu.edu"
 
     return fakeresults
-
 
 
 if __name__ == "__main__":
