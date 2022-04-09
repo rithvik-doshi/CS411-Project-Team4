@@ -9,11 +9,13 @@ flight_apiKey = keys.flight_apiKey
 weather_apiKey = keys.weather_apiKey
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='client/build', static_url_path="/")
 
 
 @app.route("/", methods=["GET"])
 def hello():
+
+    return app.send_static_file('index.html')
 
     res = api_query("AS136")
 
