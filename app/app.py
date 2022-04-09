@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 import re
 
 app = Flask(__name__)
@@ -6,7 +6,15 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def hello():
+
+    return send_from_directory('client/public', 'index.html')
+
     return render_template("index.html", team_num="Team 4")
+
+
+@app.route("/<path:path>")
+def home(path):
+    return send_from_directory('client/public', path)
 
 
 @app.route("/search", methods=["POST"])
@@ -23,6 +31,10 @@ def search():
                            lastlogin=res["last-login"],
                            prov=res["provisioned"],
                            acclvl=res["access-level"])
+
+
+
+
 
 
 def api_query(username):
