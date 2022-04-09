@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, send_from_directory
 import re
+import keys.keys as keys
 
 app = Flask(__name__)
 
@@ -10,11 +11,6 @@ def hello():
     return send_from_directory('client/public', 'index.html')
 
     return render_template("index.html", team_num="Team 4")
-
-
-@app.route("/<path:path>")
-def home(path):
-    return send_from_directory('client/public', path)
 
 
 @app.route("/search", methods=["POST"])
@@ -33,13 +29,12 @@ def search():
                            acclvl=res["access-level"])
 
 
-
-
-
-
 def api_query(username):
 
-    print("new fake api call!")
+    print("new REAL api call!")
+
+    key1 = keys.AeroAPIkey
+    key2 = keys.OpenWeatherAPIkey
 
     fakeresults = {
         "last-login": "29 days ago",
