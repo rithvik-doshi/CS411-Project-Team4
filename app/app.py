@@ -17,21 +17,16 @@ def hello():
 
     return app.send_static_file('index.html')
 
-    res = api_query("AS136")
+
+
+@app.route("/search", defaults={"flight_num": None}, methods=["GET"])
+@app.route("/search/<string:flight_num>", methods=['GET'])
+def search(flight_num=None):
+
+    res = api_query(flight_num)
 
     return res.json()
 
-
-@app.route("/search", methods=["POST"])
-def search():
-
-    username = request.form["username"]
-    # sanitize the username to only alphanumerics
-    username = re.sub(r'\W+', '', username)
-
-    res = api_query(username)
-
-    return "res"
 
 
 def api_query(flight_number):
@@ -51,6 +46,7 @@ def api_query(flight_number):
         print("Error executing request")
 
     return response
+
 
 
 if __name__ == "__main__":
