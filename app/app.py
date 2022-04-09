@@ -1,6 +1,13 @@
 from flask import Flask, render_template, request, send_from_directory
 import re
-import keys.keys as keys
+from keys import keys
+import requests
+
+# API VARIABLES
+flight_apiUrl = "https://aeroapi.flightaware.com/aeroapi/"
+flight_apiKey = keys.flight_apiKey
+weather_apiKey = keys.weather_apiKey
+
 
 app = Flask(__name__)
 
@@ -8,9 +15,9 @@ app = Flask(__name__)
 @app.route("/", methods=["GET"])
 def hello():
 
-    return send_from_directory('client/public', 'index.html')
+    res = api_query("AS136")
 
-    return render_template("index.html", team_num="Team 4")
+    return res.json()
 
 
 @app.route("/search", methods=["POST"])
@@ -22,29 +29,26 @@ def search():
 
     res = api_query(username)
 
-    return render_template("search.html", username=username,
-                           email=res["email"],
-                           lastlogin=res["last-login"],
-                           prov=res["provisioned"],
-                           acclvl=res["access-level"])
+    return "res"
 
 
-def api_query(username):
+def api_query(flight_number):
 
     print("new REAL api call!")
 
-    key1 = keys.AeroAPIkey
-    key2 = keys.OpenWeatherAPIkey
+    ident = flight_number
+    payload = {'max_pages': 2}
+    auth_header = {'x-apikey':flight_apiKey}
 
-    fakeresults = {
-        "last-login": "29 days ago",
-        "provisioned": "March 16th 2021",
-        "access-level": "3"
-    }
+    response = requests.get(flight_apiUrl + f"flights/{ident}",
+        params=payload, headers=auth_header)
 
-    fakeresults["email"] = username + "@bu.edu"
+    if response.status_code == 200:
+        print(response.json())
+    else:
+        print("Error executing request")
 
-    return fakeresults
+    return response
 
 
 if __name__ == "__main__":
