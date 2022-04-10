@@ -1,25 +1,25 @@
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
+import Search from './components/Search'
 
 function App() {
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <br/><br/>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          CS411: Flight Cancellation
         </p>
-        <div>
-          <input placeholder="Search"></input>
-          <button className="btn btn-primary submit">Submit</button>
-        </div>
+        <Search/>
         <a
-          className="App-link"
-          href="https://reactjs.org"
+          className="Repo-Link"
+          href="https://github.com/rithvik-doshi/CS411-Project-Team4"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Link to GitHub
         </a>
       </header>
     </div>
