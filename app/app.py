@@ -18,7 +18,6 @@ def hello():
     return app.send_static_file('index.html')
 
 
-
 @app.route("/search", defaults={"flight_num": None}, methods=["GET"])
 @app.route("/search/<string:flight_num>", methods=['GET'])
 def search(flight_num=None):
@@ -28,17 +27,16 @@ def search(flight_num=None):
     return res.json()
 
 
-
 def api_query(flight_number):
 
     print("new REAL api call!")
 
     ident = flight_number
     payload = {'max_pages': 2}
-    auth_header = {'x-apikey':flight_apiKey}
+    auth_header = {'x-apikey': flight_apiKey}
 
     response = requests.get(flight_apiUrl + f"flights/{ident}",
-        params=payload, headers=auth_header)
+                            params=payload, headers=auth_header)
 
     if response.status_code == 200:
         print(response.json())
@@ -46,7 +44,6 @@ def api_query(flight_number):
         print("Error executing request")
 
     return response
-
 
 
 if __name__ == "__main__":

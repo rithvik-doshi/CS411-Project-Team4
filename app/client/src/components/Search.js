@@ -1,6 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import SearchBar from './SearchBar';
 
+const parseString = (string) => {
+    const data = JSON.parse(string);
+    console.log(data.flights[0].ident) // TO REMOVE
+    string = data.flights[0].ident
+    return string;
+}
+
 export default function Search({clearResults}) {
     const [input, setInput] = useState('');
     const [data, setData] = useState();
@@ -34,9 +41,9 @@ export default function Search({clearResults}) {
             fetch(`${URL}${input}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                console.log(data); // TO REMOVE
                 if (data) {
-                    setData(JSON.stringify(data));
+                    setData(parseString(JSON.stringify(data)));
                 }
             })
         ])
