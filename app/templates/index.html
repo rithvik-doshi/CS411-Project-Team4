@@ -1,6 +1,14 @@
-<html>
+{% extends 'base.html'%}
 
-<p>Hello World</p>
-<p>this should be replaced with the react frontend!</p>
+{% block content %}
+    <h4 class="text-center">Home Page for {{team_num}}</h4>
 
-</html>
+    <div class="btn-group container d-flex align-items-center justify-content-center">
+        <form action="/search" method = "POST">
+            <input type="text" class="form-control" name="username" placeholder="Enter a username">
+            <button type="submit" class="btn btn-success btn-sm m-2">Go to search</button>
+        </form>
+    </div>
+    
+
+{% endblock %}
