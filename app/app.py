@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, send_from_directory
 import re
 from keys import keys
 import requests
+from parse import parser
 
 # API VARIABLES
 flight_apiUrl = "https://aeroapi.flightaware.com/aeroapi/"
@@ -31,7 +32,7 @@ def api_query(flight_number):
 
     print("new REAL api call!")
 
-    ident = flight_number
+    ident = re.sub(r'[^a-zA-Z0-9]', '', flight_number).upper().replace(" ", "")
     payload = {'max_pages': 2}
     auth_header = {'x-apikey': flight_apiKey}
 
@@ -42,6 +43,10 @@ def api_query(flight_number):
         print(response.json())
     else:
         print("Error executing request")
+
+    json_object = response._content
+
+    response._content = parser(json_object)
 
     return response
 
