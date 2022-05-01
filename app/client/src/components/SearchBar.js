@@ -1,9 +1,12 @@
-import React from 'react';
-const SearchBar = ({keyword, setKeyword}) => {
+import React, {useState} from 'react';
+const SearchBar = ({keyword, dateKeyword, setKeyword}) => {
+
+  const [date, setDate] = useState();
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      setKeyword(event.target.value)
+      console.log(event.target.value, date)
+      setKeyword(event.target.value, date)
     }
   }
 
@@ -11,6 +14,15 @@ const SearchBar = ({keyword, setKeyword}) => {
 
   return (
     <>
+    <input
+    style={BarStyling}
+     key="random2"
+     value={dateKeyword}
+     class="form-control"
+     placeholder={"Enter flight date: YYYY-MM-DD"}
+     onChange={(e) => setDate(e.target.value)}
+    />
+    <br/>
     <input
     style={BarStyling}
      key="random1"

@@ -20,19 +20,20 @@ def hello():
 
 
 @app.route("/search", defaults={"flight_num": None}, methods=["GET"])
-@app.route("/search/<string:flight_num>", methods=['GET'])
-def search(flight_num=None):
+@app.route("/search/<string:flight_num>/<string:date>", methods=['GET'])
+def search(flight_num=None, date=None):
 
-    res = api_query(flight_num)
+    res = api_query(flight_num, date)
 
     return res.json()
 
 
-def api_query(flight_number):
+def api_query(flight_number, date):
 
     print("new REAL api call!")
 
     ident = re.sub(r'[^a-zA-Z0-9]', '', flight_number).upper().replace(" ", "")
+    # Create a regex to validate YYYY-MM-DD?
     payload = {'max_pages': 2}
     auth_header = {'x-apikey': flight_apiKey}
 
@@ -40,13 +41,14 @@ def api_query(flight_number):
                             params=payload, headers=auth_header)
 
     if response.status_code == 200:
-        print(response.json())
+        # print(response.json())
+        pass
     else:
         print("Error executing request")
 
     json_object = response._content
 
-    response._content = parser(json_object)
+    response._content = parser(json_object, date)
 
     return response
 
