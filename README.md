@@ -14,3 +14,5 @@ https://openweathermap.org/price
 
 Python 3.7+
 Flask
+requests
+flask-mongoengine
