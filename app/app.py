@@ -99,6 +99,19 @@ def add_flight(flight_num=None, date=None, username=None):
     return '{status: "ok"}'
 
 
+# Delete a tracked flight from the database given its oid
+@app.route("/delete_flight/<string:oid>", methods=["GET"])
+def delete_flight(oid=None):
+
+    # Check if the object exists in the database
+    if Flight.objects(id=oid).first() == None:
+        return '{status: "error", error: "flight object not found"}'
+
+    # Delete the flight
+    Flight.objects(id=oid).first().delete()
+    return '{status: "ok"}'
+
+
 
 # Return all of a user's tracked flights (and query the apis for most up to date data)
 @app.route("/get_flights/<string:username>", methods=["GET"])
@@ -114,13 +127,13 @@ def get_flights(username=None):
     flight_dict = {}
 
     if flights.first() == None:
-        return "empty"
+        return "{}"
 
+    # Loop through all flights and requery the api for most up to date data
+    i = 0
     for x in flights:
-        flight_dict[x] = "poggers"
-        # flight_dict[x.id] = {
-
-        # }1222
+        flight_dict[i] = x.to_json() # api_query(x.flight_num, x.flight_date).json() #
+        i = i + 1
 
     return json.dumps(flight_dict)
 
