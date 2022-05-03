@@ -13,4 +13,9 @@ https://openweathermap.org/price
 ## Dependencies
 
 Python 3.7+
+
 Flask
+
+requests
+
+flask-mongoengine
