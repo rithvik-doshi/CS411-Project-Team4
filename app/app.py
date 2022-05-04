@@ -6,6 +6,7 @@ import json
 import hashlib
 
 from flask_mongoengine import MongoEngine
+from pyairports.airports import Airports
 
 from parse import parser
 # from templates import *
@@ -13,6 +14,7 @@ from parse import parser
 # API VARIABLES
 flight_apiUrl = "https://aeroapi.flightaware.com/aeroapi/"
 flight_apiKey = keys.flight_apiKey
+weather_apiUrl = ""
 weather_apiKey = keys.weather_apiKey
 
 
@@ -169,13 +171,42 @@ def api_query(flight_number, date):
         # print(response.json())
         pass
     else:
-        print("Error executing request")
+        print("Error executing flight api request")
 
     json_object = response._content
 
     response._content = parser(json_object, date)
 
     return response
+
+
+# Query the weather api given an airport iata code
+def weather_api_query(airport_code):
+
+    print("new weather api call")
+
+    # Convert airport code to lat and long
+    airports = Airports()
+    try:
+        result = airports.airport_iata(airport_code)
+    except:
+        return '{status: "error", error: "airport code not found"}'
+
+    lat=result.lat
+    lon=result.lon
+
+    # Query the weather api
+    query = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={weather_apiKey}"
+
+    response = requests.get(query)
+
+    if response.status_code == 200:
+        pass
+    else:
+        print("Error executing weather api request")
+        return '{status: "error", error: "error querying weather api"}'
+
+    return response._content
 
 
 if __name__ == "__main__":
