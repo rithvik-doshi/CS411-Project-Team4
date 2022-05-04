@@ -13,6 +13,10 @@ https://openweathermap.org/price
 ## Dependencies
 
 Python 3.7+
+PyAirports (https://github.com/NICTA/pyairports)
 Flask
 requests
 flask-mongoengine
+
+## Installation and Setup
+Install all python dependencies above with pip/pip3. Install and start mongod with the start.sh script in the /db folder under /app. Start the app with python3 app.py. navigate to 127.0.0.1:5000.
