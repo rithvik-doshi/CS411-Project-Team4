@@ -3,6 +3,7 @@ import re
 from keys import keys
 import requests
 import json
+import hashlib
 
 from flask_mongoengine import MongoEngine
 
@@ -54,7 +55,8 @@ def hello():
 def add_user(username=None, password=None):     # test/testpass
 
     # Create new object to save
-    new_user = User(username=username, password=password)
+    result = hashlib.sha256(password.encode())
+    new_user = User(username=username, password=result.hexdigest())
 
     # Check if this user already exists
     if User.objects(username=username).first() != None:
@@ -70,8 +72,9 @@ def add_user(username=None, password=None):     # test/testpass
 @app.route("/check_user/<string:username>/<string:password>")
 def check_user(username=None, password=None):
 
-    # Check if user with this username and password exists
-    if User.objects(username=username, password=password).first() == None:
+    # Check if user with this username and password (hash) exists
+    result = hashlib.sha256(password.encode()).hexdigest()
+    if User.objects(username=username, password=result).first() == None:
         return '{status: "error", error: "username and/or password is invalid"}'
 
     # If user is found return success and the valid username

@@ -1,4 +1,4 @@
-from flask_mongoengine import db
+from flask_mongoengine import MongoEngine
 
 class User(db.Document):
     username = db.StringField(required=True)
